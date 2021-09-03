@@ -28,4 +28,17 @@ internal class BankControllerTest {
             }
     }
 
+    @Test
+    fun `should return a single bank with account number`() {
+        // when / then
+        val accountNumber = "1234"
+        mockMvc.get("/api/banks/$accountNumber")
+            .andDo { print() }
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+            }
+
+    }
+
 }
