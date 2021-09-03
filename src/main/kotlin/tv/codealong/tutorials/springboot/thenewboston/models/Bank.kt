@@ -6,5 +6,4 @@ package tv.codealong.tutorials.springboot.thenewboston.models
 data class Bank(
     val accountNumber: String,
     val trust: Double,
-    val transactionFee: Int
-    )
+    val transactionFee: Int)
