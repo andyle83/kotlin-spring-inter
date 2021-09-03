@@ -14,5 +14,5 @@ class BankController(private val service: BankService) {
     fun getBanks() = service.getBanks()
 
     @GetMapping("{accountNumber}")
-    fun getBank(@PathVariable accountNumber: String) = "Hello Account Number"
+    fun getBank(@PathVariable accountNumber: String) = service.getBank(accountNumber)
 }
