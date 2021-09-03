@@ -37,6 +37,7 @@ internal class BankControllerTest {
             .andExpect {
                 status { isOk() }
                 content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$.trust") { value(3.14) }
             }
 
     }
