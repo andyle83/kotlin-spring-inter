@@ -36,6 +36,6 @@ internal class MockBankDataSourceTest {
         val banks = mockDataSource.getBanks()
 
         // then
-        assertThat(banks.distinctBy { it.accountNumber }).hasSameSizeAs(banks.size)
+        assertThat(banks.distinctBy { it.accountNumber }).hasSameSizeAs(banks)
     }
 }
