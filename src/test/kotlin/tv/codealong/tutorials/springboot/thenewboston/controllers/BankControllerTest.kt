@@ -18,6 +18,8 @@ internal class BankControllerTest {
     @Autowired
     lateinit var mockMvc: MockMvc
 
+    val baseUrl = "/api/banks"
+
     @Nested
     @DisplayName("getBanks()")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -26,7 +28,7 @@ internal class BankControllerTest {
         @Test
         fun `should return all banks`() {
             // when / then
-            mockMvc.get("/api/banks")
+            mockMvc.get("$baseUrl")
                 .andDo { print() }
                 .andExpect {
                     status { isOk() }
@@ -46,7 +48,7 @@ internal class BankControllerTest {
         fun `should return a single bank with account number`() {
             // when / then
             val accountNumber = "1234"
-            mockMvc.get("/api/banks/$accountNumber")
+            mockMvc.get("$baseUrl/$accountNumber")
                 .andDo { print() }
                 .andExpect {
                     status { isOk() }
@@ -57,10 +59,10 @@ internal class BankControllerTest {
         }
         
         @Test
-        fun `should return 404 response status with un-existed account number`() {
+        fun `should return Not Found response status with un-existed account number`() {
             // when / then
-            val accountNumber = "0000"
-            mockMvc.get("/api/banks/$accountNumber")
+            val accountNumber = "does_not_exist"
+            mockMvc.get("$baseUrl/$accountNumber")
                 .andDo { print() }
                 .andExpect {
                     status { isNotFound() }
