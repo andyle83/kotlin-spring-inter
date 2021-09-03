@@ -9,8 +9,6 @@ class BankService(private val dataSource: BankDataSource) {
 
     fun getBanks(): Collection<Bank> = dataSource.getBanks()
 
-    fun getBank(accountNumber: String): Bank {
-        return Bank(accountNumber = "123", trust = 1.2, transactionFee = 9)
-    }
+    fun getBank(accountNumber: String): Bank = dataSource.getBank(accountNumber)
 
 }
