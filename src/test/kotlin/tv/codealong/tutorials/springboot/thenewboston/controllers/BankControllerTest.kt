@@ -1,6 +1,5 @@
 package tv.codealong.tutorials.springboot.thenewboston.controllers
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -55,7 +54,17 @@ internal class BankControllerTest {
                     jsonPath("$.trust") { value(3.14) }
                     jsonPath( "$.transactionFee") { value(10) }
                 }
-
+        }
+        
+        @Test
+        fun `should return 404 response status with un-existed account number`() {
+            // when / then
+            val accountNumber = "0000"
+            mockMvc.get("/api/banks/$accountNumber")
+                .andDo { print() }
+                .andExpect {
+                    status { isNotFound() }
+                }
         }
 
     }
