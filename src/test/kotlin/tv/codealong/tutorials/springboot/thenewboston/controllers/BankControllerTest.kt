@@ -36,7 +36,6 @@ internal class BankControllerTest {
             .andDo { print() }
             .andExpect {
                 status { isOk() }
-                content { contentType(MediaType.APPLICATION_JSON) }
             }
 
     }
