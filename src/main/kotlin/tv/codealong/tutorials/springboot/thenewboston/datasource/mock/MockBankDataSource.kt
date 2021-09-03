@@ -8,7 +8,7 @@ import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 class MockBankDataSource : BankDataSource {
 
     override fun getBanks(): Collection<Bank> {
-        TODO("Not yet implemented")
+        return listOf(Bank("", 0.0, 1))
     }
 
 }
