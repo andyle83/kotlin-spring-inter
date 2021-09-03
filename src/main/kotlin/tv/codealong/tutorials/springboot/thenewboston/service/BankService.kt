@@ -6,7 +6,5 @@ import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 
 @Service
 class BankService(private val dataSource: BankDataSource) {
-    fun getBanks(): Collection<Bank> {
-        return emptyList()
-    }
+    fun getBanks(): Collection<Bank> = dataSource.getBanks()
 }

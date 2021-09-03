@@ -1,5 +1,6 @@
 package tv.codealong.tutorials.springboot.thenewboston.service
 
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Test
@@ -12,6 +13,10 @@ internal class BankServiceTest {
 
     @Test
     fun `should call its data source to retrieve banks`() {
+        // given
+        // specify behavior for mock
+        every { dataSource.getBanks() } returns emptyList()
+
         // when
         val banks = bankService.getBanks()
         
