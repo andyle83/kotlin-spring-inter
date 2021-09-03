@@ -29,4 +29,13 @@ internal class MockBankDataSourceTest {
         assertThat(banks).allMatch { it.trust != 0.0 }
         assertThat(banks).allMatch { it.transactionFee != 0 }
     }
+
+    @Test
+    fun `should provide data with unique account numbers`() {
+        // when
+        val banks = mockDataSource.getBanks()
+
+        // then
+        assertThat(banks.distinctBy { it.accountNumber }).hasSameSizeAs(banks.size)
+    }
 }
