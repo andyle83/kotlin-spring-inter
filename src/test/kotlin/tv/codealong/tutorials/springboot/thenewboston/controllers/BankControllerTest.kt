@@ -45,12 +45,30 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
     inner class  AddBank{
 
         @Test
+        fun `should return BAD REQUEST when add new bank with existing account number`() {
+            val newBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 10)
+
+            // when
+            val resultActionPost = mockMvc.post(baseUrl) {
+                contentType = MediaType.APPLICATION_JSON
+                content = objectMapper.writeValueAsString(newBank)
+            }
+
+            // then
+            resultActionPost
+                .andDo { print() }
+                .andExpect {
+                    status { isBadRequest() }
+                }
+        }
+
+        @Test
         fun `should add the new bank`() {
             // given
             val newBank = Bank("123", 1.0, 77)
 
             // when
-            val resultActionPost = mockMvc.post("$baseUrl") {
+            val resultActionPost = mockMvc.post(baseUrl) {
                 contentType = MediaType.APPLICATION_JSON
                 content = objectMapper.writeValueAsString(newBank)
             }
