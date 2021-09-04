@@ -8,4 +8,6 @@ interface BankDataSource {
 
     fun getBank(accountNumber: String): Bank
 
+    fun addBank(newBank: Bank) : Bank
+
 }
