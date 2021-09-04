@@ -46,12 +46,12 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
 
         @Test
         fun `should return BAD REQUEST when add new bank with existing account number`() {
-            val newBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 10)
+            val invalidBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 10)
 
             // when
             val resultActionPost = mockMvc.post(baseUrl) {
                 contentType = MediaType.APPLICATION_JSON
-                content = objectMapper.writeValueAsString(newBank)
+                content = objectMapper.writeValueAsString(invalidBank)
             }
 
             // then

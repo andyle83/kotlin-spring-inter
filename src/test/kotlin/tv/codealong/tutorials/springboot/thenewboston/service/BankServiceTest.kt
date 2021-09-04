@@ -21,7 +21,7 @@ internal class BankServiceTest {
     }
 
     @Test
-    fun `should call its data source to add new banks with unique account number`() {
+    fun `should call its data source to add new banks with account number`() {
         val newBank = Bank("123", 12.0, 77)
 
         // when

@@ -16,9 +16,13 @@ class MockBankDataSource : BankDataSource {
     override fun getBanks(): Collection<Bank> = banks
 
     override fun addBank(newBank: Bank): Bank {
-        banks.add(newBank)
+        if (!banks.any { it.accountNumber == newBank.accountNumber }) {
+            banks.add(newBank)
 
-        return newBank
+            return newBank
+        }
+
+        throw IllegalArgumentException("Bank with account number ${newBank.accountNumber} is already existed}")
     }
 
     override fun getBank(accountNumber: String): Bank =
