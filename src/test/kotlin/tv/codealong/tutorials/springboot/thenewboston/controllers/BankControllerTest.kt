@@ -29,7 +29,7 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
         @Test
         fun `should return all banks`() {
             // when / then
-            mockMvc.get("$baseUrl")
+            mockMvc.get(baseUrl)
                 .andDo { print() }
                 .andExpect {
                     status { isOk() }
