@@ -12,6 +12,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.put
 import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 
 @SpringBootTest
@@ -36,6 +37,32 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                     jsonPath( "$.[0].accountNumber") { value("1234") }
                     jsonPath("$.[1].accountNumber") { value("1111") }
                     jsonPath("$.[2].accountNumber") { value("2222") }
+                }
+        }
+
+    }
+
+    @Nested
+    @DisplayName("PATCH /api/banks")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class PatchBank {
+
+        @Test
+        fun `should update existed bank account number`() {
+            // given
+            val updatedBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 20)
+
+            // when
+            val resultActionPatch = mockMvc.put(baseUrl) {
+                contentType = MediaType.APPLICATION_JSON
+                content = objectMapper.writeValueAsString(updatedBank)
+            }
+
+            // then
+            resultActionPatch
+                .andDo { print() }
+                .andExpect {
+                    status { isOk() }
                 }
         }
 
