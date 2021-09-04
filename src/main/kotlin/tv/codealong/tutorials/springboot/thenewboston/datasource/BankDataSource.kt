@@ -10,4 +10,6 @@ interface BankDataSource {
 
     fun addBank(newBank: Bank) : Bank
 
+    fun update(bank: Bank): Bank
+
 }

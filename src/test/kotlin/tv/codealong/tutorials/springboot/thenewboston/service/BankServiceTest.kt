@@ -30,4 +30,16 @@ internal class BankServiceTest {
         // then
         verify(exactly = 1) { dataSource.addBank(newBank) }
     }
+
+    @Test
+    fun `should calls its data source to update existed bank account`() {
+        // given
+        val updatedBank = Bank("123", 12.0, 77)
+
+        // when
+        bankService.updateBank(updatedBank)
+
+        // then
+        verify(exactly = 1) { dataSource.update(updatedBank) }
+    }
 }
