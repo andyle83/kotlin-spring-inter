@@ -2,6 +2,7 @@ package tv.codealong.tutorials.springboot.thenewboston.datasource.mock
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 
@@ -37,6 +38,30 @@ internal class MockBankDataSourceTest {
 
         // then
         assertThat(banks.distinctBy { it.accountNumber }).hasSameSizeAs(banks)
+    }
+
+    @Test
+    fun `should provide data with an account number`() {
+        val accountNumber = "1234"
+
+        // when
+        val existedBank = mockDataSource.getBank(accountNumber)
+
+        // then
+        assertNotNull(existedBank)
+        assertEquals(existedBank.accountNumber, accountNumber)
+    }
+
+    @Test
+    fun `should throws an exception when provide an invalid account number`() {
+        val invalidAccountNumber = "an_invalid_account"
+
+        // when / then
+        try {
+            mockDataSource.getBank(invalidAccountNumber)
+        } catch (e: NoSuchElementException) {
+            assertEquals(e.message, "Could not find a bank with account number $invalidAccountNumber")
+        }
     }
 
     @Test
