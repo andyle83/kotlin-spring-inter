@@ -21,7 +21,7 @@ internal class BankServiceTest {
     }
 
     @Test
-    fun `should call its data source to add new banks`() {
+    fun `should call its data source to add new banks with unique account number`() {
         val newBank = Bank("123", 12.0, 77)
 
         // when
@@ -29,5 +29,6 @@ internal class BankServiceTest {
 
         // then
         verify(exactly = 1) { dataSource.addBank(newBank) }
+        assert(dataSource.getBanks().filter { it.accountNumber == newBank.accountNumber }.size == 1)
     }
 }
