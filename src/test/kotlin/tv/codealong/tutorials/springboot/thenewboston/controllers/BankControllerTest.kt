@@ -64,6 +64,9 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                 .andExpect {
                     status { isOk() }
                     content { contentType(MediaType.APPLICATION_JSON) }
+                    jsonPath("$.accountNumber") { value(updatedBank.accountNumber) }
+                    jsonPath("$.trust") { value(updatedBank.trust) }
+                    jsonPath("$.transactionFee") { value(updatedBank.transactionFee) }
                 }
         }
 
