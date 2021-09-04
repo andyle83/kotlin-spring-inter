@@ -3,6 +3,7 @@ package tv.codealong.tutorials.springboot.thenewboston.controllers
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 import tv.codealong.tutorials.springboot.thenewboston.service.BankService
 
 @RestController
@@ -17,4 +18,8 @@ class BankController(private val service: BankService) {
 
     @GetMapping("{accountNumber}")
     fun getBank(@PathVariable accountNumber: String) = service.getBank(accountNumber)
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    fun postBank(@RequestBody bank: Bank) = bank
 }
