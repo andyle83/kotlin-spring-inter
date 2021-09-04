@@ -22,7 +22,7 @@ class MockBankDataSource : BankDataSource {
             return newBank
         }
 
-        throw IllegalArgumentException("Bank with account number ${newBank.accountNumber} is already existed}")
+        throw IllegalArgumentException("Bank with account number ${newBank.accountNumber} is already existed")
     }
 
     override fun update(updatedbank: Bank): Bank {

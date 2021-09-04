@@ -1,9 +1,9 @@
 package tv.codealong.tutorials.springboot.thenewboston.datasource.mock
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 
 internal class MockBankDataSourceTest {
 
@@ -37,5 +37,27 @@ internal class MockBankDataSourceTest {
 
         // then
         assertThat(banks.distinctBy { it.accountNumber }).hasSameSizeAs(banks)
+    }
+
+    @Test
+    fun `should allow to add new bank`() {
+        val newBank = Bank(accountNumber = "7777", trust = 3.14, transactionFee = 10)
+
+        // when
+        mockDataSource.addBank(newBank)
+
+        // then
+        assertThat(mockDataSource.getBanks().contains(newBank))
+    }
+
+    @Test
+    fun `should throw an exception when trying to add an existing bank account`() {
+        val invalidBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 10)
+
+        try {
+            mockDataSource.addBank(invalidBank)
+        } catch (e: IllegalArgumentException) {
+            assertEquals(e.message, "Bank with account number ${invalidBank.accountNumber} is already existed")
+        }
     }
 }
