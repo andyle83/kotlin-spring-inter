@@ -25,8 +25,8 @@ class MockBankDataSource : BankDataSource {
         throw IllegalArgumentException("Bank with account number ${newBank.accountNumber} is already existed}")
     }
 
-    override fun update(bank: Bank): Bank {
-        TODO("Not yet implemented")
+    override fun update(updatedbank: Bank): Bank {
+        return updatedbank
     }
 
     override fun getBank(accountNumber: String): Bank =

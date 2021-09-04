@@ -63,6 +63,7 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                 .andDo { print() }
                 .andExpect {
                     status { isOk() }
+                    content { contentType(MediaType.APPLICATION_JSON) }
                 }
         }
 
