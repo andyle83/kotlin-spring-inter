@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.patch
 import org.springframework.test.web.servlet.post
-import org.springframework.test.web.servlet.put
 import tv.codealong.tutorials.springboot.thenewboston.models.Bank
 
 @SpringBootTest
@@ -53,7 +53,7 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
             val updatedBank = Bank(accountNumber = "1234", trust = 3.14, transactionFee = 20)
 
             // when
-            val resultActionPatch = mockMvc.put(baseUrl) {
+            val resultActionPatch = mockMvc.patch(baseUrl) {
                 contentType = MediaType.APPLICATION_JSON
                 content = objectMapper.writeValueAsString(updatedBank)
             }
