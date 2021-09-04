@@ -29,6 +29,5 @@ internal class BankServiceTest {
 
         // then
         verify(exactly = 1) { dataSource.addBank(newBank) }
-        assert(dataSource.getBanks().filter { it.accountNumber == newBank.accountNumber }.size == 1)
     }
 }
