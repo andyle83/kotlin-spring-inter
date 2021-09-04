@@ -68,6 +68,13 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                         json(objectMapper.writeValueAsString(updatedBank))
                     }
                 }
+
+            // can do one more persist test
+            mockMvc.get("$baseUrl/${updatedBank.accountNumber}")
+                .andDo { print() }
+                .andExpect { content {
+                    json(objectMapper.writeValueAsString(updatedBank))
+                } }
         }
 
     }
