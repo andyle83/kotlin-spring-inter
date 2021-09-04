@@ -46,7 +46,7 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
     @DisplayName("PATCH /api/banks")
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     inner class PatchBank {
-
+        
         @Test
         fun `should update existed bank account number`() {
             // given
@@ -63,10 +63,10 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                 .andDo { print() }
                 .andExpect {
                     status { isOk() }
-                    content { contentType(MediaType.APPLICATION_JSON) }
-                    jsonPath("$.accountNumber") { value(updatedBank.accountNumber) }
-                    jsonPath("$.trust") { value(updatedBank.trust) }
-                    jsonPath("$.transactionFee") { value(updatedBank.transactionFee) }
+                    content {
+                        contentType(MediaType.APPLICATION_JSON)
+                        json(objectMapper.writeValueAsString(updatedBank))
+                    }
                 }
         }
 
@@ -111,10 +111,10 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                 .andDo { print() }
                 .andExpect {
                     status { isCreated() }
-                    content { contentType(MediaType.APPLICATION_JSON) }
-                    jsonPath("$.accountNumber") { value(newBank.accountNumber) }
-                    jsonPath("$.trust") { value(newBank.trust) }
-                    jsonPath( "$.transactionFee") { value(newBank.transactionFee) }
+                    content {
+                        contentType(MediaType.APPLICATION_JSON)
+                        json(objectMapper.writeValueAsString(newBank))
+                    }
                 }
         }
 
