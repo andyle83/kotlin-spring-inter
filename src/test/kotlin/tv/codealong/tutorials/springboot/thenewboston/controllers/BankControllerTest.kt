@@ -35,7 +35,7 @@ internal class BankControllerTest @Autowired constructor(val mockMvc: MockMvc, v
                     content { contentType(MediaType.APPLICATION_JSON) }
                     jsonPath( "$.[0].accountNumber") { value("1234") }
                     jsonPath("$.[1].accountNumber") { value("1111") }
-                    jsonPath("$.[2].accountNumber") { value("222") }
+                    jsonPath("$.[2].accountNumber") { value("2222") }
                 }
         }
 
